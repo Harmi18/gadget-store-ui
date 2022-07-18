@@ -30,7 +30,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr data-id="1" v-for="productItem in product" :key="productItem">
+              <tr
+                data-id="1"
+                v-for="productItem in showProductsList"
+                :key="productItem"
+              >
                 <td>
                   {{ productItem.id }}
                 </td>
@@ -104,6 +108,36 @@
                   </div>
                 </div>
               </tr>
+
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a
+                      class="page-link"
+                      href="#"
+                      aria-label="Previous"
+                      @click="currentCount -= 1"
+                    >
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item" v-for="count in pageCount" :key="count">
+                    <a class="page-link" href="#" @click="currentCount = count">
+                      {{ count }}</a
+                    >
+                  </li>
+                  <li class="page-item">
+                    <a
+                      class="page-link"
+                      href="#"
+                      aria-label="Next"
+                      @click="currentCount += 1"
+                    >
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </tbody>
           </table>
         </div>
@@ -138,11 +172,23 @@ export default {
         Image: "",
       },
       removeItem: false,
+      productListCount: 10,
+      pageCount: 0,
+      currentCount: 1,
     };
+  },
+  computed: {
+    showProductsList() {
+      return this.product.slice(
+        this.productListCount * (this.currentCount - 1),
+        this.productListCount * this.currentCount
+      );
+    },
   },
   async mounted() {
     let res = await this.$store.dispatch("product/getProduct");
     this.product = res.data;
+    this.pageCount = Math.ceil(this.product.length / this.productListCount);
 
     // localStorage
     // let data = localStorage.getItem("productItem");
@@ -187,6 +233,22 @@ export default {
         return e;
       }
     },
+    // async paginationData() {
+    // try {
+    // await axios
+    //   .get(`https://fakestoreapi.com/users?limit=${this.productListCount}`)
+    //   .then((response) => {
+    // if (this.productListCount > this.product.length) return;
+    // console.log((this.productListCount = this.productListCount + 4));
+    //       console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // } catch (e) {
+    //   return;
+    // }
+    // },
   },
 };
 </script>

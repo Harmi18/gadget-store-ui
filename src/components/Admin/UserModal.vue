@@ -16,7 +16,7 @@
             class="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-            @click="closeModal"
+            @click="removeData()"
           ></button>
         </div>
         <div class="modal-body">
@@ -45,7 +45,16 @@
               >Email</label
             >
             <div class="col-lg-9">
-              <input class="form-control" type="text" v-model="email" />
+              <input
+                class="form-control"
+                @change="isEmailValid"
+                v-model="email"
+                type="email"
+              />
+
+              <span v-show="wrongEmail" style="color: red"
+                >Incorrect email address</span
+              >
             </div>
             <br />
             <br />
@@ -143,7 +152,7 @@
             type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
-            @click="closeModal"
+            @click="removeData()"
           >
             Close
           </button>
@@ -154,11 +163,13 @@
 </template>
 
 <script>
+/* eslint-disable no-useless-escape */
 import axios from "axios";
 export default {
   props: ["open", "fields", "mode"],
   data() {
     return {
+      wrongEmail: false,
       email: "",
       username: "",
       password: "",
@@ -185,8 +196,6 @@ export default {
   created() {},
   watch: {
     fields: function (newVal) {
-      console.log(this.firstname);
-      console.log(newVal.firstname);
       this.email = newVal.email;
       this.username = newVal.username;
       this.password = newVal.password;
@@ -203,6 +212,16 @@ export default {
   },
 
   methods: {
+    isEmailValid() {
+      const emailRe =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (this.email.match(emailRe)) {
+        this.wrongEmail = false;
+      } else {
+        console.log(emailRe.test(this.email));
+        this.wrongEmail = true;
+      }
+    },
     removeData() {
       this.email = "";
       this.username = "";
@@ -239,8 +258,9 @@ export default {
           },
           phone: this.phone,
         };
-        console.log("DETAILSS", details);
+
         this.$emit("add", details);
+        console.log("DETAILSS", details);
         axios
           .post("https://fakestoreapi.com/users", {
             data: details,

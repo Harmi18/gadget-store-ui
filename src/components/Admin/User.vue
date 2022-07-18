@@ -33,8 +33,9 @@
                 <th>Edit</th>
               </tr>
             </thead>
+
             <tbody>
-              <tr data-id="1" v-for="user in users" :key="user">
+              <tr data-id="1" v-for="user in showUserList" :key="user">
                 <td data-field="name">
                   {{ user.name.firstname }}
                 </td>
@@ -118,6 +119,36 @@
                   </div>
                 </div>
               </tr>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a
+                      class="page-link"
+                      href="#"
+                      aria-label="Previous"
+                      @click="currentCount -= 1"
+                    >
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+
+                  <li class="page-item" v-for="count in pageCount" :key="count">
+                    <a class="page-link" href="#" @click="currentCount = count">
+                      {{ count }}</a
+                    >
+                  </li>
+                  <li class="page-item">
+                    <a
+                      class="page-link"
+                      href="#"
+                      aria-label="Next"
+                      @click="currentCount += 1"
+                    >
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </tbody>
           </table>
         </div>
@@ -163,11 +194,24 @@ export default {
         },
         phone: "",
       },
+      productListCount: 5,
+      pageCount: 0,
+      currentCount: 1,
     };
   },
   async mounted() {
     let res = await this.$store.dispatch("admin/getUsers");
     this.users = res.data;
+    this.pageCount = Math.ceil(this.users.length / this.productListCount);
+  },
+  computed: {
+    showUserList() {
+      let data = this.users.slice(
+        this.productListCount * (this.currentCount - 1),
+        this.productListCount * this.currentCount
+      );
+      return data;
+    },
   },
   methods: {
     async editUser(user) {
@@ -199,7 +243,6 @@ export default {
         this.users.splice(findUser, 1, res);
         this.$store.commit("admin/GET_USERS", this.users);
       }
-      console.log(this.users);
     },
 
     async removeUser(user) {

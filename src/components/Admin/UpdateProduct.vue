@@ -16,6 +16,7 @@
             class="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
+            @click="removeData()"
           ></button>
         </div>
         <div class="modal-body">
@@ -67,18 +68,28 @@
             <label class="col-lg-3 col-form-label form-control-label"
               >Image</label
             >
-            <div class="col-lg-9">
-              <input
-                type="file"
-                id="bannerImg"
-                @change="onFileUpload($event)"
-              />
-              <div id="preview">
+
+            <div class="col-lg-9" v-if="image">
+              <div class="float-end">
+                <button
+                  type="button"
+                  class="btn-close close-btn-image"
+                  @click="removeImage"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div id="preview" style="margin-top: 20px">
                 <img v-if="image" id="tableBanner" :src="image" />
               </div>
             </div>
-            <br />
-            <br />
+            <div class="col-lg-9" v-else>
+              <input
+                class="form-control"
+                type="text"
+                v-model="image"
+                style="margin-top: 7px"
+              />
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -95,6 +106,7 @@
             type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
+            @click="removeData()"
           >
             Close
           </button>
@@ -131,6 +143,7 @@ export default {
       this.description = newVal.description;
       this.price = newVal.price;
       this.selectedCategory = newVal.category;
+      this.image = newVal.image;
     },
   },
   methods: {
@@ -139,6 +152,10 @@ export default {
       this.description = "";
       this.price = "";
       this.selectedCategory = "";
+      this.image = "";
+    },
+    removeImage() {
+      this.image = "";
     },
     async addProduct() {
       try {
@@ -148,7 +165,7 @@ export default {
             price: this.price,
             description: this.description,
             category: this.selectedCategory,
-            // image: this.image,
+            image: this.image,
           })
           .then((response) => {
             this.$emit("add", response.data);
@@ -169,6 +186,7 @@ export default {
             price: this.price,
             description: this.description,
             category: this.selectedCategory,
+            image: this.image,
           })
           .then((response) => {
             this.$emit("update", response.data);
@@ -182,10 +200,10 @@ export default {
       }
       this.removeData();
     },
-    closeModal() {
-      this.removeData();
-      this.$emit("toggle-modal", false);
-    },
+    // closeModal() {
+    //   this.removeData();
+    //   this.$emit("toggle-modal", false);
+    // },
   },
 };
 </script>
@@ -198,7 +216,10 @@ export default {
 }
 
 #preview img {
-  max-width: 100%;
+  max-width: 40%;
   max-height: 500px;
+}
+.close-btn-image {
+  margin-top: 3px !important;
 }
 </style>
