@@ -3,13 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "db": "json-server --watch db.json",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/vue-fontawesome": "^3.0.0-5",
+    "@popperjs/core": "^2.11.5",
+    "axios": "^0.27.2",
+    "bootstrap": "^5.2.0-beta1",
+    "bootstrap-icons": "^1.8.3",
     "core-js": "^3.6.5",
-    "vue": "^3.0.0"
+    "jquery": "^3.6.0",
+    "json-server": "^0.17.0",
+    "json-server-auth": "^2.1.0",
+    "popper.js": "^1.16.1",
+    "startbootstrap-simple-sidebar": "^6.0.5",
+    "vee-validate": "^4.5.11",
+    "vue": "^3.0.0",
+    "vue-localstorage": "^0.6.2",
+    "vue-router": "^4.1.1",
+    "vue-toast-notification": "^0.6.3",
+    "vuex": "^4.0.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.13",
@@ -18,7 +37,9 @@
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.0.0",
+    "sass": "^1.53.0",
+    "sass-loader": "^10.3.0"
   },
   "eslintConfig": {
     "root": true,
