@@ -1,21 +1,21 @@
 <template>
   <div>
-    <div class="row" style="margin-right: 85px">
-      <div class="col-md-12 mr-3 d-flex flex-row-reverse">
-        <span>
-          <select
-            id="collection"
-            class="filter-list bold category-box"
-            v-model="selectedCategory"
-            @change="selectCategory"
-          >
-            <option v-for="(option, index) in categoryOption" :key="index">
-              {{ option }}
-            </option>
-          </select>
-        </span>
-      </div>
+    <!-- <div class="row"> -->
+    <div class="justify-content-end d-flex">
+      <span class="me-5">
+        <select
+          id="collection"
+          class="filter-list bold category-box"
+          v-model="selectedCategory"
+          @change="selectCategory"
+        >
+          <option v-for="(option, index) in categoryOption" :key="index">
+            {{ option }}
+          </option>
+        </select>
+      </span>
     </div>
+    <!-- </div> -->
     <div class="row">
       <div
         class="col-md-4"

@@ -122,7 +122,9 @@ body {
   overflow-x: hidden;
   padding-right: 0px !important;
 }
-
+.navbar {
+  margin-bottom: 0px !important;
+}
 .navbar-static {
   position: fixed;
   width: 100%;

@@ -28,4 +28,13 @@ export default {
   position: relative;
   padding: 90px 0px;
 }
+@media screen and (max-width: 768px) {
+  .card {
+    height: 392px !important;
+    width: 343px !important;
+  }
+  .justify-content-end.d-flex {
+    margin-top: 50px;
+  }
+}
 </style>

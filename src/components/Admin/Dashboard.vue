@@ -1,7 +1,15 @@
 <template>
   <div class="wrapper">
     <!-- Sidebar  -->
-    <nav id="sidebar">
+    <nav
+      id="sidebar"
+      style="
+        position: fixed;
+        width: 200px;
+        height: -webkit-fill-available;
+        z-index: 1;
+      "
+    >
       <div class="sidebar-header">
         <h3>Admin</h3>
       </div>
@@ -17,8 +25,11 @@
         </li>
       </ul>
     </nav>
-    <div id="content">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div id="content" style="padding: 6px 8px 6px 16px">
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-light"
+        style="position: fixed; width: calc(100% - 290px); margin-left: 245px"
+      >
         <div class="container-fluid dashboard-title">
           <h6>Dashboard</h6>
           &nbsp;
