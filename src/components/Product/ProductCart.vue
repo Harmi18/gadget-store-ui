@@ -144,10 +144,7 @@ export default {
       if (cartProduct !== -1 && this.cartItem[cartProduct].quantity) {
         this.$store.state.cart.productItem[cartProduct].quantity -= 1;
         if (this.cartItem[cartProduct].quantity === 0) {
-          this.$store.state.cart.productItem.splice(
-            this.cartItem[cartProduct],
-            1
-          );
+          this.$store.state.cart.productItem.splice(this.cartItem[cartProduct]);
         }
       }
     },
