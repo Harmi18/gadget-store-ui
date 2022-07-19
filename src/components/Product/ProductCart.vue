@@ -144,13 +144,16 @@ export default {
       if (cartProduct !== -1 && this.cartItem[cartProduct].quantity) {
         this.$store.state.cart.productItem[cartProduct].quantity -= 1;
         if (this.cartItem[cartProduct].quantity === 0) {
-          this.$store.state.cart.productItem.splice(cartProduct);
+          this.$store.state.cart.productItem.splice(
+            this.cartItem[cartProduct],
+            1
+          );
         }
       }
     },
     removeCartProduct(id) {
       const cartProduct = this.cartItem.findIndex((el) => el.productId === id);
-      this.$store.state.cart.productItem.splice(cartProduct);
+      this.$store.state.cart.productItem.splice(cartProduct, 1);
     },
     async checkOutCart() {
       this.$router.push({ path: "/checkout" });

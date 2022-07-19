@@ -119,7 +119,6 @@ export default {
       }
     },
     async addCart(item) {
-      console.log("sdafjhskjfhjksdhfksdjhf");
       const findIndex = this.$store.state.cart.productItem.findIndex(
         (el) => el.productId === item.id
       );
