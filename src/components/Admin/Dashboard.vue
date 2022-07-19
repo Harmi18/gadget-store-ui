@@ -23,8 +23,7 @@
           <h6>Dashboard</h6>
           &nbsp;
           <button type="button" class="btn btn-secondary" @click="logoutAdmin">
-            <i class="fas fa-align-left"></i>
-            <span>Logout</span>
+            Logout
           </button>
         </div>
       </nav>

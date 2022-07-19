@@ -25,14 +25,12 @@
         </button>
       </div>
     </div>
-    <!-- <div
-      v-show="showAlert"
-      class="alert alert-danger d-flex align-items-center"
-      role="alert"
-    >
-      <i class="bi bi-info-circle" style="margin: 10px"></i>
-      <div>Invalid Username and Password</div>
-    </div> -->
+    <div v-show="showAlert">
+      <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <i class="bi bi-info-circle" style="margin: 10px"></i>
+        <div>Invalid Username and Password</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,19 +42,30 @@ export default {
     return {
       username: "",
       password: "",
-      // showAlert: false,
+      showAlert: false,
     };
   },
 
   methods: {
     async loginUser() {
-      // if (
-      //   this.$route.path === "/admin/login" &&
-      //   this.username !== "johnd" &&
-      //   this.password !== "m38rmF$"
-      // ) {
-      //   this.showAlert = true;
-      // }
+      if (
+        this.$route.path === "/admin/login" &&
+        this.username !== "johnd" &&
+        this.password !== "m38rmF$"
+      ) {
+        this.showAlert = true;
+        return;
+      }
+      if (
+        this.$route.path === "/loginUser" &&
+        this.username !== "johnd" &&
+        this.password !== "m38rmF$" &&
+        this.username !== "mor_2314" &&
+        this.password !== "83r5^_"
+      ) {
+        this.showAlert = true;
+        return;
+      }
       await axios
         .post("https://fakestoreapi.com/auth/login", {
           username: this.username,

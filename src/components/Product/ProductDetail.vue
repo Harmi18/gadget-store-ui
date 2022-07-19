@@ -1,30 +1,45 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 product-card">
-        <div class="card main-card">
-          <div class="card-horizontal">
-            <div class="img-square-wrapper">
-              <img
-                :src="productdetail.image"
-                class="card-img-top"
-                style="height: 400px; width: 380px; padding-top: 12px"
-                alt=""
-              />
-            </div>
-            <div class="card-body vl">
-              <h4 class="card-title">{{ productdetail.title }}</h4>
-              <br />
-              <h6 class="card-subtitle mb-2">
-                Price:{{ productdetail.price }}
-              </h6>
-              <h6 class="card-subtitle mb-2">
-                Category:{{ productdetail.category }}
-              </h6>
-              <br /><br />
-              <p class="card-text">
-                {{ productdetail.description }}
-              </p>
+      <div class="col-12">
+        <div class="float-start">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            @click="
+              this.$router.push({
+                path: this.$router.options.history.state.back,
+              })
+            "
+          >
+            <i class="bi bi-arrow-left-circle"></i> Go Back
+          </button>
+        </div>
+        <div class="product-card">
+          <div class="card main-card">
+            <div class="card-horizontal">
+              <div class="img-square-wrapper">
+                <img
+                  :src="productdetail.image"
+                  class="card-img-top"
+                  style="height: 400px; width: 380px; padding-top: 12px"
+                  alt=""
+                />
+              </div>
+              <div class="card-body vl">
+                <h4 class="card-title">{{ productdetail.title }}</h4>
+                <br />
+                <h6 class="card-subtitle mb-2">
+                  Price:{{ productdetail.price }}
+                </h6>
+                <h6 class="card-subtitle mb-2">
+                  Category:{{ productdetail.category }}
+                </h6>
+                <br /><br />
+                <p class="card-text">
+                  {{ productdetail.description }}
+                </p>
+              </div>
             </div>
           </div>
         </div>

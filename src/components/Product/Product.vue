@@ -1,62 +1,64 @@
 <template>
-  <div class="row" style="margin-right: 85px">
-    <div class="col-md-12 mr-3 d-flex flex-row-reverse">
-      <span>
-        <select
-          id="collection"
-          class="filter-list bold category-box"
-          v-model="selectedCategory"
-          @change="selectCategory"
-        >
-          <option v-for="(option, index) in categoryOption" :key="index">
-            {{ option }}
-          </option>
-        </select>
-      </span>
+  <div>
+    <div class="row" style="margin-right: 85px">
+      <div class="col-md-12 mr-3 d-flex flex-row-reverse">
+        <span>
+          <select
+            id="collection"
+            class="filter-list bold category-box"
+            v-model="selectedCategory"
+            @change="selectCategory"
+          >
+            <option v-for="(option, index) in categoryOption" :key="index">
+              {{ option }}
+            </option>
+          </select>
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div
-      class="col-md-4"
-      align="center"
-      v-for="item in showProducts"
-      :key="item"
-    >
-      <div class="card" style="width: 25rem; margin: 10px; height: 25rem">
-        <div>
-          <h5 class="card-header" style="font-size: 15px">
-            {{ item.title }}
-          </h5>
-          <div class="card-body">
-            <img
-              :src="item.image"
-              class="card-img-top"
-              :alt="item.image"
-              style="height: 180px; width: 180px"
-              @click="productDetail(item.id)"
-            />
-            <p class="card-text text-muted product-text">
-              Price:${{ item.price }}<br />
-              Category:{{ item.category }}<br /><br />
-              <button
-                type="button"
-                class="btn btn-outline-primary"
-                @click="addCart(item)"
-              >
-                <span><i class="bi bi-bag"></i></span>
-                Add to cart
-              </button>
-            </p>
+    <div class="row">
+      <div
+        class="col-md-4"
+        align="center"
+        v-for="item in showProducts"
+        :key="item"
+      >
+        <div class="card" style="width: 25rem; margin: 10px; height: 25rem">
+          <div>
+            <h5 class="card-header" style="font-size: 15px">
+              {{ item.title }}
+            </h5>
+            <div class="card-body">
+              <img
+                :src="item.image"
+                class="card-img-top"
+                :alt="item.image"
+                style="height: 180px; width: 180px"
+                @click="productDetail(item.id)"
+              />
+              <p class="card-text text-muted product-text">
+                Price:${{ item.price }}<br />
+                Category:{{ item.category }}<br /><br />
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
+                  @click="addCart(item)"
+                >
+                  <span><i class="bi bi-bag"></i></span>
+                  Add to cart
+                </button>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div v-if="totalProduct.data.length > productCount">
-    <button type="button" class="btn btn-outline-primary" @click="loadMore">
-      Load More
-    </button>
+    <div v-if="totalProduct.data.length > productCount">
+      <button type="button" class="btn btn-outline-primary" @click="loadMore">
+        Load More
+      </button>
+    </div>
   </div>
 </template>
 

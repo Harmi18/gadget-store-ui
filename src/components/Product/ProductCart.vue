@@ -7,7 +7,7 @@
     aria-hidden="true"
     ref="modalEle"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle">Cart</h5>
@@ -99,6 +99,7 @@
             data-bs-dismiss="modal"
             aria-label="Close"
             @click="checkOutCart"
+            v-if="cartItem.length > 0"
           >
             Checkout
           </button>
@@ -163,6 +164,14 @@ export default {
 .cart-product-image {
   height: 210px;
   width: 190px;
+}
+.modal-dialog-scrollable .modal-content {
+  max-height: 100% !important;
+  overflow-y: auto !important;
+}
+.modal.show .modal-dialog {
+  transform: none;
+  overflow-y: initial !important;
 }
 /* .cart-popup {
   position: fixed;

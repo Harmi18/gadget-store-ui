@@ -11,6 +11,7 @@ export default {
 
 <template>
   <div>
+    <!-- <router-view class="router-view" /> -->
     <router-view></router-view>
   </div>
 </template>
@@ -22,5 +23,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.router-view {
+  position: relative;
+  padding: 90px 0px;
 }
 </style>
