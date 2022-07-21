@@ -83,6 +83,7 @@ export default {
       } catch (e) {
         return;
       }
+      this.$store.state.cart.productItem = [];
     },
   },
 };

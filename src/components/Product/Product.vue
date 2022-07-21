@@ -17,12 +17,7 @@
     </div>
     <!-- </div> -->
     <div class="row">
-      <div
-        class="col-md-4"
-        align="center"
-        v-for="item in showProducts"
-        :key="item"
-      >
+      <div class="col" align="center" v-for="item in showProducts" :key="item">
         <div class="card" style="width: 25rem; margin: 10px; height: 25rem">
           <div>
             <h5 class="card-header" style="font-size: 15px">
@@ -42,7 +37,21 @@
                 <button
                   type="button"
                   class="btn btn-outline-primary"
+                  @click="removeItem(item.id)"
+                  v-if="
+                    this.$store.state.cart.productItem.find(
+                      (el) => el.productId === item.id
+                    )
+                  "
+                >
+                  <span><i class="bi bi-bag"></i></span>
+                  Remove from cart
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary"
                   @click="addCart(item)"
+                  v-else
                 >
                   <span><i class="bi bi-bag"></i></span>
                   Add to cart
@@ -132,6 +141,12 @@ export default {
           product: item,
         });
       }
+    },
+    async removeItem(id) {
+      const cartProduct = this.$store.state.cart.productItem.findIndex(
+        (el) => el.productId === id
+      );
+      this.$store.state.cart.productItem.splice(cartProduct, 1);
     },
   },
 };

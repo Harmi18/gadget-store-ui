@@ -46,17 +46,9 @@
             bg-danger
           "
         >
-          {{ this.$store.state.cart.productItem.length }}
+          {{ cartProductCount }}
         </span>
       </button>
-      <!-- <button
-        class="btn btn-dark"
-        style="font-size: 25px"
-        data-bs-toggle="modal"
-        data-bs-target="#cartModal"
-        @click="openCart"
-      ></button> -->
-      <!-- </div> -->
     </nav>
   </div>
   <div>
@@ -68,8 +60,6 @@
     />
   </div>
   <router-view class="router-view" />
-  <!-- <router-view name="helper" /> -->
-  <!-- </div> -->
 </template>
 
 
@@ -89,6 +79,15 @@ export default {
   },
   created() {
     this.user = localStorage.getItem("token");
+  },
+  computed: {
+    cartProductCount() {
+      let sum = 0;
+      this.$store.state.cart.productItem.map((el) => {
+        sum += el.quantity;
+      });
+      return sum;
+    },
   },
   methods: {
     openCart() {
