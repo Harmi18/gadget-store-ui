@@ -145,24 +145,4 @@ export default {
   border: solid 1px;
   margin-bottom: 16px;
 }
-// .product-listing .col {
-//   height: 5%;
-// }
-// .product-listing .col .card {
-//   padding: 24px;
-// }
-// .col {
-//   margin: 10px;
-// }
-// .row {
-//   margin-left: 10px;
-//   margin-right: 10px;
-//   row-gap: 16px;
-// }
-// .product-text {
-//   padding-top: 10px;
-//   padding-bottom: 10px;
-// }
-
-//
 </style>

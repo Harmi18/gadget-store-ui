@@ -98,10 +98,12 @@
             class="btn btn-primary"
             data-bs-dismiss="modal"
             aria-label="Close"
-            @click="checkOutCart"
+            @click="
+              this.routeCheckout === '/home' ? redirectLogin() : checkOutCart()
+            "
             v-if="cartItem.length > 0"
           >
-            Checkout
+            {{ btnValue }}
           </button>
         </div>
       </div>
@@ -116,6 +118,8 @@ export default {
     return {
       productCartDetail: [],
       cartTotal: "",
+      routeCheckout: "",
+      btnValue: "",
     };
   },
   computed: {
@@ -128,7 +132,16 @@ export default {
     },
   },
   created() {},
-  async mounted() {},
+  async mounted() {
+    if (localStorage.getItem("token") !== "") {
+      this.routeCheckout = this.$router.currentRoute.value.path;
+      if (this.routeCheckout === "/home") {
+        this.btnValue = "Login";
+      } else {
+        this.btnValue = "CheckOut";
+      }
+    }
+  },
   methods: {
     closeCart() {
       this.$emit("toggle-modal", false);
@@ -140,11 +153,13 @@ export default {
       }
     },
     removeProduct(id) {
-      const cartProduct = this.cartItem.findIndex((el) => el.productId === id);
+      const cartProduct = this.cartItem.findIndex((el) => {
+        return el.productId === id;
+      });
       if (cartProduct !== -1 && this.cartItem[cartProduct].quantity) {
         this.$store.state.cart.productItem[cartProduct].quantity -= 1;
         if (this.cartItem[cartProduct].quantity === 0) {
-          this.$store.state.cart.productItem.splice(this.cartItem[cartProduct]);
+          this.$store.state.cart.productItem.splice(cartProduct, 1);
         }
       }
     },
@@ -156,11 +171,14 @@ export default {
       this.$router.push({ path: "/checkout" });
       this.$emit("toggle-modal", false);
     },
+    redirectLogin() {
+      this.$router.push({ path: "/loginUser" });
+    },
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .cart-product-image {
   height: 210px;
   width: 190px;
@@ -173,36 +191,4 @@ export default {
   transform: none;
   overflow-y: initial !important;
 }
-/* .cart-popup {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border: solid 1px #000;
-  display: none;
-  z-index: 1000;
-  background-color: #fff;
-} */
-/*#overlay {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  display: none;
-  background-color: #000;
-  opacity: 0.5;
-} */
-/* .cart-popup {
-  bottom: 0;
-  left: 0;
-  outline: 0;
-  overflow: auto;
-  position: fixed;
-  right: 0;
-  top: 200px;
-  right: 180px;
-  left: 180px;
-  z-index: 10000;
-} */
 </style>

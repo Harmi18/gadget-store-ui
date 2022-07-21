@@ -253,7 +253,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .row {
   margin-bottom: 20px;
 }

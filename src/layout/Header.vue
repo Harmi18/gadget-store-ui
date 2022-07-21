@@ -28,8 +28,8 @@
       </div>
       <!-- <div class="float-right"> -->
       <button
-        type="button"
         class="btn btn-secondary position-relative logout-button"
+        style="margin-right: 30px"
         data-bs-toggle="modal"
         data-bs-target="#cartModal"
         @click="openCart"
@@ -46,16 +46,16 @@
             bg-danger
           "
         >
-          {{ cart.length }}
+          {{ this.$store.state.cart.productItem.length }}
         </span>
       </button>
-      <button
+      <!-- <button
         class="btn btn-dark"
         style="font-size: 25px"
         data-bs-toggle="modal"
         data-bs-target="#cartModal"
         @click="openCart"
-      ></button>
+      ></button> -->
       <!-- </div> -->
     </nav>
   </div>
@@ -92,9 +92,7 @@ export default {
   },
   methods: {
     openCart() {
-      // this.showModal = true;
       this.cart = this.$store.state.cart.productItem;
-      console.log("dsfhsdkjfhkdsjfhjkds", this.cart.length);
     },
     closeCart() {
       this.showModal = false;

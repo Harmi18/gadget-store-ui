@@ -208,7 +208,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 #preview {
   display: flex;
   justify-content: center;
